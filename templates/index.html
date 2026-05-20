@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>AI Resume Analyzer</title>
+
+    <style>
+
+        body{
+            margin:0;
+            padding:0;
+            font-family:Arial, sans-serif;
+            background:linear-gradient(to right,#4facfe,#00f2fe);
+        }
+
+        .container{
+            width:60%;
+            margin:50px auto;
+            background:white;
+            padding:30px;
+            border-radius:20px;
+            text-align:center;
+            box-shadow:0px 0px 20px rgba(0,0,0,0.3);
+        }
+
+        h1{
+            color:#2563eb;
+            font-size:45px;
+        }
+
+        .score{
+            color:green;
+            font-size:30px;
+            font-weight:bold;
+        }
+
+        .job{
+            color:purple;
+            font-size:28px;
+            font-weight:bold;
+        }
+
+        h3{
+            color:orange;
+            margin-top:25px;
+        }
+
+        input[type=file]{
+            margin:20px;
+            padding:10px;
+            font-size:16px;
+        }
+
+        button{
+            background:#2563eb;
+            color:white;
+            padding:12px 25px;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+            font-size:18px;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#1e40af;
+            transform:scale(1.05);
+        }
+
+        ul{
+            list-style:none;
+            padding:0;
+        }
+
+        li{
+            background:#f3f4f6;
+            margin:10px;
+            padding:12px;
+            border-radius:10px;
+            color:#111827;
+            font-weight:bold;
+        }
+
+        @media(max-width:768px){
+
+            .container{
+                width:90%;
+            }
+
+            h1{
+                font-size:35px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>AI Resume Analyzer</h1>
+
+    <form action="/analyze" method="POST" enctype="multipart/form-data">
+
+        <input type="file" name="resume" accept=".pdf" required>
+
+        <br>
+
+        <button type="submit">
+            Analyze Resume
+        </button>
+
+    </form>
+
+    {% if score %}
+
+        <p class="score">
+            Resume Score: {{ score }}/100
+        </p>
+
+        <h2 class="job">
+            Recommended Job Role: {{ job }}
+        </h2>
+
+        <h3>Detected Skills</h3>
+
+        <ul>
+            {% for skill in skills %}
+                <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Suggestions</h3>
+
+        <ul>
+            {% for suggestion in suggestions %}
+                <li>{{ suggestion }}</li>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
