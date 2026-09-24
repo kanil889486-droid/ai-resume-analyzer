@@ -1,0 +1,4 @@
+uploads/*.pdf
+uploads/*.pdf
+__pycache__/
+*.pyc
